@@ -47,8 +47,15 @@
             <td><?= $sm['icon']; ?></td>
             <td><?= $sm['is_active']; ?></td>
             <td>
-                <a href="" class="badge badge-success">Edit</a>
-                <a href="" class="badge badge-danger">delete</a>
+            <form action="<?= base_url('menu/delete_submenu') ?>" method="post">
+
+                <a href="" class="btn btn-success btn-sm">Edit</a>
+
+                <input type="hidden" name="id" value="<?= $sm['id']; ?>">
+
+                <button type="submit" class="btn btn-danger btn-sm">delete</button>
+
+                </form>
             </td>  
 
             </tr>

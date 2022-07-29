@@ -35,6 +35,30 @@ class Menu extends CI_Controller
      
     }
 
+    public function delete_menu(){
+
+        $this->form_validation->set_rules('id' , 'ID' , 'required');
+        
+        if($this->form_validation->run() == false){
+
+            $this->load->view('themplates/header', $data);
+            $this->load->view('themplates/sidebar', $data);
+            $this->load->view('themplates/topbar', $data);
+            $this->load->view('menu/index', $data);
+            $this->load->view('themplates/footer', $data);
+
+        }else{
+            $id = $this->input->post('id');
+        
+            $this->db->delete('user_menu', array('id' => $id));        
+
+            redirect('menu');
+        }
+
+
+
+    }
+
     public function submenu(){
 
         $data['title'] = "Sub Menu Manajement";
@@ -82,6 +106,27 @@ class Menu extends CI_Controller
 
         }
 
+    }
+
+    public function delete_submenu(){
+
+        $this->form_validation->set_rules('id' , 'ID' , 'required');
+        
+        if($this->form_validation->run() == false){
+
+            $this->load->view('themplates/header', $data);
+            $this->load->view('themplates/sidebar', $data);
+            $this->load->view('themplates/topbar', $data);
+            $this->load->view('menu/submenu', $data);
+            $this->load->view('themplates/footer', $data);
+
+        }else{
+            $id = $this->input->post('id');
+        
+            $this->db->delete('user_sub_menu', array('id' => $id));        
+
+            redirect('menu/submenu');
+        }
     }
 
 }

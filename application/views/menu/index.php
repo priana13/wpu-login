@@ -2,42 +2,63 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title ?> </h1>
-
-    <a href="" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">Add New Menu</a>
+    <h1 class="h3 mb-4 text-gray-800"><?= $title ?> </h1>    
 
     <div class="row mt-2">
 
-        <div class="col-lg-6">
+        <div class="col-lg-8">
 
-        <?=
-            form_error('menu' , '<div class="alert alert-danger" role="alert">',
-          '</div>');
-        ?>
+        <a href="" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">Add New Menu</a>
+
+        <div class="card mt-2">
+          <div class="card-header">
+              
+          </div>
+
+          <div class="card-body">
+
+              <?=
+                  form_error('menu' , '<div class="alert alert-danger" role="alert">',
+                '</div>');
+              ?>
+              
+              <?= $this->session->flashdata('message'); ?>
+              
+              <table class="table table-hover">
+              <thead>
+                  <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Menu</th>
+                  <th scope="col">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+              <?php $i=1; foreach ($menu as $m) { ?>
+                  <tr>
+                  <th scope="row"><?= $i ; ?></th>
+                  <td><?= $m['menu']; ?></td>
+                  <td>
+                      
+                      <form action="menu/delete_menu" method="post">
+
+                        <a href="" class="btn btn-success btn-sm">Edit</a>
+
+                        <input type="hidden" name="id" value="<?= $m['id']; ?>">
+
+                        <button type="submit" class="btn btn-danger btn-sm">delete</button>
+
+                      </form>
+                      
+                  </td>            
+                  </tr>
+              <?php $i++; } ?>
+              </tbody>
+              </table>
+
+          </div>
+        </div>
+
         
-        <?= $this->session->flashdata('message'); ?>
-        
-        <table class="table table-hover">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">Menu</th>
-            <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php $i=1; foreach ($menu as $m) { ?>
-            <tr>
-            <th scope="row"><?= $i ; ?></th>
-            <td><?= $m['menu']; ?></td>
-            <td>
-                <a href="" class="badge badge-success">Edit</a>
-                <a href="" class="badge badge-danger">delete</a>
-            </td>            
-            </tr>
-        <?php $i++; } ?>
-        </tbody>
-        </table>
 
         </div>
     </div>
