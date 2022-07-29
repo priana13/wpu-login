@@ -10,6 +10,14 @@
 
         <div class="col">
 
+        <?php if(validation_errors()) : ?>
+
+          <div class="alert alert-danger">
+            <?= validation_errors();  ?>
+          </div>
+          
+        <?php endif; ?>
+
         <?=
             form_error('menu' , '<div class="alert alert-danger" role="alert">',
           '</div>');
@@ -75,8 +83,32 @@
         </div>
 
         <div class="form-group">       
-            <input type="text" class="form-control" id="menu" name="menu" aria-describedby="menu">
+            <select class="form-control" name="menu_id" id="menu_id">
+              <option value="">Select Menu</option>
+              <?php foreach($menu as $m) : ?>
+              
+                <option value="<?= $m['id'] ?>"><?= $m['menu'] ?></option>
+              <?php endforeach; ?>
+
+            </select>
         </div>
+
+        <div class="form-group">       
+            <input type="text" class="form-control" id="url" name="url" placeholder="Sub Menu url">
+        </div>
+
+        <div class="form-group">       
+            <input type="text" class="form-control" id="icon" name="icon" placeholder="Sub Menu icon">
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="is_active" value="1" id="is_active" checked>
+          <label class="form-check-label" for="is_active">
+            Aktive?
+          </label>
+        </div>
+
+
 
       </div>
       <div class="modal-footer">
