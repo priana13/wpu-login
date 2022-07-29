@@ -35,4 +35,23 @@ class Menu extends CI_Controller
      
     }
 
+    public function submenu(){
+
+        $data['title'] = "Sub Menu Manajement";
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        // $data['subMenu'] = $this->db->get('user_sub_menu')->result_array();
+
+        // Load Model dan diganti nama modelnya jadi menu
+        $this->load->model('Menu_model' , 'menu');
+
+        $data['subMenu'] = $this->menu->getSubMenu();
+
+        $this->load->view('themplates/header', $data);
+        $this->load->view('themplates/sidebar', $data);
+        $this->load->view('themplates/topbar', $data);
+        $this->load->view('menu/submenu', $data);
+        $this->load->view('themplates/footer', $data);
+    }
+
 }
